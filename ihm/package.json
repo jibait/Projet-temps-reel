@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "generate-api": "swagger-typescript-api -p ../interfaces/API-swagger.yaml -o app/api/generated -n api.ts",
     "lint": "next lint"
   },
   "dependencies": {
@@ -13,7 +14,13 @@
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@fortawesome/free-brands-svg-icons": "^6.6.0",
+    "@fortawesome/free-regular-svg-icons": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "framer-motion": "^11.5.4",
+    "mobx": "^6.13.2",
+    "mobx-react-lite": "^4.0.7",
     "next": "14.2.8",
     "react": "^18",
     "react-dom": "^18"
@@ -22,8 +29,12 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/swagger-jsdoc": "^6.0.4",
     "eslint": "^8",
     "eslint-config-next": "14.2.8",
-    "typescript": "^5"
+    "swagger-typescript-api": "^13.0.22",
+    "swagger-typescript-codegen": "^3.2.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
   }
 }

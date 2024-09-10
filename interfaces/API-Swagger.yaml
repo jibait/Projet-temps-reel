@@ -1,0 +1,50 @@
+openapi: 3.0.0
+info:
+  title: API de Chat
+  description: API pour envoyer et récupérer des messages de chat
+  version: 1.0.0
+paths:
+  /messages:
+    get:
+      summary: Récupérer tous les messages de chat
+      responses:
+        '200':
+          description: Une liste de messages de chat
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Message'
+    post:
+      summary: Créer un nouveau message de chat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Message'
+      responses:
+        '201':
+          description: Message créé avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+components:
+  schemas:
+    Message:
+      type: object
+      properties:
+        pseudo:
+          type: string
+          example: "Utilisateur123"
+        message:
+          type: string
+          example: "Bonjour tout le monde !"
+        image:
+          type: string
+          format: byte
+          example: "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="
+      required:
+        - pseudo
