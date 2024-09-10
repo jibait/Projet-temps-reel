@@ -1,0 +1,17 @@
+[
+    {
+        "pseudo": "Alice",
+        "message": "Salut tout le monde!",
+        "image": null
+    },
+    {
+        "pseudo": "Bob",
+        "message": "Bonjour Alice!",
+        "image": null
+    },
+    {
+        "pseudo": "Charlie",
+        "message": null,
+        "image": "https://via.placeholder.com/150"
+    }
+]
