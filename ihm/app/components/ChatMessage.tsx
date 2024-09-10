@@ -1,18 +1,13 @@
 import React from 'react';
 import { Flex, Avatar, Box, Text, Image } from '@chakra-ui/react';
+import { Message } from '../api/generated/api';
 
-interface ChatMessageProps {
-    username: string;
-    text?: string;
-    imageUrl?: string;
-}
-
-const ChatMessage: React.FC<ChatMessageProps> = ({ username, text, imageUrl }) => (
+const ChatMessage: React.FC<Message> = ({ pseudo, message, photoProfil, image }) => (
     <Flex my="4" p="3" bg="gray.100" borderRadius="md" align="center">
-        <Avatar name={username} size="md" mr="4" />
+        <Avatar bgImage={photoProfil} name={pseudo} size="md" mr="4" />
         <Box>
-            <Text fontWeight="bold">{username}</Text>
-            {imageUrl ? <Image src={imageUrl} alt="message" boxSize="150px" /> : <Text>{text}</Text>}
+            <Text fontWeight="bold">{pseudo}</Text>
+            {image ? <Image src={image} alt="message" boxSize="150px" /> : <Text>{message}</Text>}
         </Box>
     </Flex>
 );

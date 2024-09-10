@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, Input, VStack, Image, Grid, GridItem } from '@chakra-ui/react';
-
-interface UserInfoModaleProps {
-    isOpen: boolean;
-    onClose: () => void;
-    onSave: (pseudo: string, profilePicture: string) => void;
-}
+import { observer } from 'mobx-react-lite';
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, Input, VStack, Image, Grid, GridItem, Text, Box } from '@chakra-ui/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faImage } from '@fortawesome/free-solid-svg-icons';
+import userStore from '../stores/userStore';
 
 const predefinedImages = [
     'https://lh3.googleusercontent.com/d/1UkgnKngCa3YMkhcXbzx73_-D88L2sxrQ',
@@ -15,9 +13,10 @@ const predefinedImages = [
     'https://lh3.googleusercontent.com/d/1f8pmbZApyxrfxWaekcLYAIZATfabOoD4'
 ];
 
-const UserInfoModale: React.FC<UserInfoModaleProps> = ({ isOpen, onClose, onSave }) => {
-    const [pseudo, setPseudo] = useState('');
-    const [profilePicture, setProfilePicture] = useState<string | null>(null);
+const UserInfoModale: React.FC = observer(() => {
+    const [pseudo, setPseudo] = useState(userStore.pseudo);
+    const [profilePicture, setProfilePicture] = useState<string | null>(userStore.profilePicture);
+    const [pseudoError, setPseudoError] = useState(false);
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -35,42 +34,67 @@ const UserInfoModale: React.FC<UserInfoModaleProps> = ({ isOpen, onClose, onSave
     };
 
     const handleSave = () => {
-        if (pseudo && profilePicture) {
-            onSave(pseudo, profilePicture);
+        if (!pseudo.trim()) {
+            setPseudoError(true);
+            return;
         }
+        setPseudoError(false);
+        userStore.setPseudo(pseudo);
+        userStore.setProfilePicture(profilePicture);
+        userStore.setModaleOpen(false);
     };
 
     return (
-        <Modal isOpen={isOpen} onClose={() => { }} isCentered>
+        <Modal isOpen={userStore.isModaleOpen} onClose={() => { }} isCentered>
             <ModalOverlay />
             <ModalContent>
                 <ModalHeader>Configuration du Profil</ModalHeader>
                 <ModalBody>
                     <VStack spacing={4}>
-                        <Input
-                            placeholder="Entrez votre pseudo"
-                            value={pseudo}
-                            onChange={(e) => setPseudo(e.target.value)}
-                        />
-                        <Grid templateColumns="repeat(5, 1fr)" gap={4}>
-                            {predefinedImages.map((image, index) => (
-                                <GridItem key={index} onClick={() => handlePredefinedImageClick(image)}>
-                                    <Image
-                                        borderRadius='full'
-                                        boxSize='70px'
-                                        src={image}
-                                        objectFit="cover"
-                                        cursor="pointer"
-                                    />
-                                </GridItem>
-                            ))}
-                        </Grid>
-                        <Input
-                            type="file"
-                            accept="image/*"
-                            onChange={handleFileChange}
-                            placeholder="Upload your own image"
-                        />
+                        <Box width="100%">
+                            <Text fontSize="lg" fontWeight="bold" pb={2}>
+                                <FontAwesomeIcon icon={faUser} /> Pseudo
+                            </Text>
+                            <Input
+                                placeholder="Entrez votre pseudo"
+                                value={pseudo}
+                                onChange={(e) => setPseudo(e.target.value)}
+                                isInvalid={pseudoError}
+                            />
+                            {pseudoError && <Text color="red.500">Le pseudo est obligatoire.</Text>}
+                        </Box>
+
+                        <Box width="100%">
+                            <Text fontSize="lg" fontWeight="bold" pb={2}>
+                                <FontAwesomeIcon icon={faImage} /> Photo de profil
+                            </Text>
+                            <Grid templateColumns="repeat(5, 1fr)" gap={4}>
+                                {predefinedImages.map((image, index) => (
+                                    <GridItem key={index} onClick={() => handlePredefinedImageClick(image)}>
+                                        <Image
+                                            borderRadius="full"
+                                            boxSize="70px"
+                                            src={image}
+                                            objectFit="cover"
+                                            cursor="pointer"
+                                            border={profilePicture === image ? '4px solid #2b6cb0' : 'none'}
+                                            _hover={{
+                                                filter: 'grayscale(80%)',
+                                                transition: '0.3s',
+                                            }}
+                                        />
+                                    </GridItem>
+                                ))}
+                            </Grid>
+
+                            <Text p={2} m={2}>Ou mettez votre photo de profil personnalisée :</Text>
+                            <Input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleFileChange}
+                            />
+                        </Box>
+
                         {profilePicture &&
                             <Image
                                 src={profilePicture}
@@ -89,6 +113,6 @@ const UserInfoModale: React.FC<UserInfoModaleProps> = ({ isOpen, onClose, onSave
             </ModalContent>
         </Modal>
     );
-};
+});
 
 export default UserInfoModale;

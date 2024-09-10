@@ -45,6 +45,12 @@ components:
         image:
           type: string
           format: byte
-          example: "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="
+          description: "Image associée au message en bytes"
+          example: "iVBORw0KGgoAAAANSUhEUgAAAAUA..."
+        photoProfil:
+          type: string
+          format: byte
+          description: "Photo de profil de l'utilisateur en bytes"
+          example: "iVBORw0KGgoAAAANSUhEUgAAAAUA..."
       required:
         - pseudo

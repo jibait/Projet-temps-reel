@@ -36,18 +36,15 @@ const Chat: React.FC = observer(() => {
 
     return (
         <>
-            <UserInfoModale
-                isOpen={isProfileModalOpen}
-                onClose={() => { }}
-                onSave={handleProfileSave}
-            />
+            <UserInfoModale />
             <VStack spacing={4} align="stretch">
                 {apiClient.messages.map((msg, index) => (
                     <ChatMessage
                         key={index}
-                        username={msg.pseudo}
-                        text={msg.message}
-                        imageUrl={msg.image}
+                        pseudo={msg.pseudo}
+                        message={msg.message}
+                        photoProfil={msg.photoProfil}
+                        image={msg.image}
                     />
                 ))}
                 <ChatInput onSendMessage={handleSendMessage} onSendImage={handleSendImage} />

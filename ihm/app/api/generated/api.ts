@@ -15,10 +15,17 @@ export interface Message {
   /** @example "Bonjour tout le monde !" */
   message?: string;
   /**
+   * Image associée au message en bytes
    * @format byte
-   * @example "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="
+   * @example "iVBORw0KGgoAAAANSUhEUgAAAAUA..."
    */
   image?: string;
+  /**
+   * Photo de profil de l'utilisateur en bytes
+   * @format byte
+   * @example "iVBORw0KGgoAAAANSUhEUgAAAAUA..."
+   */
+  photoProfil?: string;
 }
 
 export type QueryParamsType = Record<string | number, any>;
