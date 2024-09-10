@@ -1,10 +1,13 @@
 import React from 'react';
-import { Image } from '@chakra-ui/react'
-import { Flex, IconButton } from '@chakra-ui/react';
+import { Image, Flex, IconButton } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-const Navbar: React.FC = () => (
+interface NavbarProps {
+    onProfileIconClick: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onProfileIconClick }) => (
     <Flex justify="space-between" align="center" p="4" bg="blue.600" color="white">
         <Image
             src="https://lh3.googleusercontent.com/d/1XhYGaNFMfFDFFqIehAZX2g1BzRjyvatB"
@@ -18,6 +21,7 @@ const Navbar: React.FC = () => (
             icon={<FontAwesomeIcon icon={faUser} />}
             isRound
             size="lg"
+            onClick={onProfileIconClick} // Ouvrir la modale lorsque l'icône est cliquée
         />
     </Flex>
 );

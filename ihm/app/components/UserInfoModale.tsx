@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, Input, VStack, Image, Grid, GridItem } from '@chakra-ui/react';
 
-interface ProfileModalProps {
+interface UserInfoModaleProps {
     isOpen: boolean;
     onClose: () => void;
     onSave: (pseudo: string, profilePicture: string) => void;
@@ -15,7 +15,7 @@ const predefinedImages = [
     'https://lh3.googleusercontent.com/d/1f8pmbZApyxrfxWaekcLYAIZATfabOoD4'
 ];
 
-const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose, onSave }) => {
+const UserInfoModale: React.FC<UserInfoModaleProps> = ({ isOpen, onClose, onSave }) => {
     const [pseudo, setPseudo] = useState('');
     const [profilePicture, setProfilePicture] = useState<string | null>(null);
 
@@ -91,4 +91,4 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose, onSave }) 
     );
 };
 
-export default ProfileModal;
+export default UserInfoModale;
