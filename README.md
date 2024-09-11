@@ -54,6 +54,21 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés :
 1. **Démarrer le serveur backend** (si applicable) :
 
     Assurez-vous que RabbitMQ est en cours d'exécution et que le serveur backend est configuré pour se connecter à RabbitMQ.
+    Pour lancer RabbitMQ :
+    ```sh 
+    docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.13-management 
+    ```
+
+    Activation du plugin permettant l'accès a une interface web si besoin :
+
+    - Commencer par rentrer dans le container :
+    ``` sh
+    docker exec -it rabbitmq bash
+    ```
+    Activer le plugin :
+    ```sh 
+    rabbitmq-plugins enable
+    ```
 
 2. **Démarrer l'application frontend** :
 
