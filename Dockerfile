@@ -1,9 +1,9 @@
 FROM rabbitmq:3.13-management
 
-RUN rabbitmq-plugins enable --offline rabbitmq_web_stomp
+# Activer les plugins RabbitMQ en une seule couche
+RUN rabbitmq-plugins enable --offline rabbitmq_web_stomp \
+    && rabbitmq-plugins enable rabbitmq_management \
+    && rabbitmq-plugins enable rabbitmq_tracing
 
-RUN rabbitmq-plugins enable rabbitmq_management
-
-RUN rabbitmq-plugins enable rabbitmq_tracing
-
-EXPOSE 15672
+# Exposer les ports nécessaires
+EXPOSE 5672 15672
