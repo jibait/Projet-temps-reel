@@ -67,10 +67,15 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés :
     ```
     Activer le plugin :
     ```sh 
-    rabbitmq-plugins enable
+    rabbitmq-plugins enable rabbitmq_management
     ```
 
-2. **Démarrer l'application frontend** :
+    Si vous voulez trace rles erreurs sur les messages :
+    ```sh 
+    rabbitmq-plugins enable rabbitmq_tracing
+    ```
+
+3. **Démarrer l'application frontend** :
 
     ```sh
     npm start
