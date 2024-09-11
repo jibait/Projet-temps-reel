@@ -9,7 +9,7 @@ import { useRabbitMQ } from '../Hooks/useRabbitMQ';
 
 const Chat: React.FC = observer(() => {
     const [isProfileModalOpen, setProfileModalOpen] = useState(true); // La modale est ouverte par défaut
-    const messagesFromRabbitMQ = useRabbitMQ('ws://localhost:8080'); // Utilisation du Hook pour se connecter à RabbitMQ
+    const messagesFromRabbitMQ = useRabbitMQ('ws://localhost:15674/ws',"message"); // Utilisation du Hook pour se connecter à RabbitMQ (changer le 2nd argument )
 
     useEffect(() => {
         apiClient.fetchMessages();

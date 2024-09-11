@@ -1,40 +1,45 @@
 import { useEffect, useState } from 'react';
+import { Client, Message } from '@stomp/stompjs';
 
-// Définir le type du tableau de messages
-type Message = string;
+type RabbitMQMessage = string;
 
-export const useRabbitMQ = (wsUrl: string): Message[] => {
-  const [messages, setMessages] = useState<Message[]>([]);
+/**
+ * Fonction personnalisée pour se connecter à RabbitMQ et recevoir des messages
+ * 
+ * @param wsUrl L'URL du serveur RabbitMQ
+ * @param queueName Le nom de la file d'attente à laquelle on s'abonne
+ * @returns Les messages reçus via RabbitMQ pour la file d'attente spécifiée
+ */
+export const useRabbitMQ = (wsUrl: string, queueName: string): RabbitMQMessage[] => {
+  const [messages, setMessages] = useState<RabbitMQMessage[]>([]);
 
   useEffect(() => {
-    
-    // Crée une nouvelle connexion WebSocket à l'URL spécifiée
-    const ws: WebSocket = new WebSocket(wsUrl);
+    const client = new Client({
+      brokerURL: wsUrl,
+      reconnectDelay: 5000,
+      onConnect: () => {
+        console.log('Connexion à RabbitMQ établie');
 
-    // événement déclenché lorsque la connexion WebSocket est établie
-    ws.onopen = () => {
-      console.log('Connecté à la websocket RabbitMQ');
-    };
+        // Abonnement à la file d'attente
+        client.subscribe(queueName, (message: Message) => {
+          if (message.body) {
+            setMessages((prev) => [...prev, message.body]);
+          }
+        });
+      },
+      onStompError: (frame) => {
+        // Gestion des erreurs
+        console.error('erreurs : ' + frame.headers['message']);
+        console.error('détails: ' + frame.body);
+      },
+    });
 
-    // événement déclenché lorsque des messages sont reçus via la WebSocket
-    ws.onmessage = (event: MessageEvent<string>) => {
-      // Ajoute le nouveau message reçu au tableau des messages existants
-      setMessages((prev) => [...prev, event.data]);
-    };
-
-    ws.onclose = () => {
-      console.log('Fermerture de la connexion à la websocket RabbitMQ');
-    };
-
-    // Gestion des erreurs
-    ws.onerror = (error) => {
-      console.error('Erreur websocket : ', error);
-    };
+    client.activate();
 
     return () => {
-      ws.close();
+      client.deactivate();
     };
-  }, [wsUrl]);
+  }, [wsUrl, queueName]);
 
   return messages;
 };
