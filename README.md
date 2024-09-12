@@ -23,79 +23,41 @@ Le projet **Chatroom en Temps Réel** --> *Blopfish Roo est une application de m
 
 Avant de commencer, assurez-vous d'avoir les éléments suivants installés :
 
-- npm 
-- RabbitMQ en cours d'exécution
+- Docker
 
 ## Installation
 
 1. Clonez le dépôt :
 
     ```sh
-    git clone <URL_DU_DEPOT>
-    cd <NOM_DU_REPERTOIRE>
+    git clone https://github.com/jibait/Projet-temps-reel.git
     ```
 
 2. Installez les dépendances du projet :
 
     ```sh
+    # Depuis le répertoire /ihm du projet
     npm install
     ```
 
-3. Générer les swaggers (si besoin):
+## Exécution
 
-    ```sh
-    npm run generate-api
-    ```
-
-## Configuration
-
-### Démarrage du Serveur de Développement
-
-1. **Démarrer le serveur backend** (si applicable) :
-
-    Assurez-vous que RabbitMQ est en cours d'exécution et que le serveur backend est configuré pour se connecter à RabbitMQ.
-    Pour lancer RabbitMQ :
+1. **Démarrer le service RabbitMQ** :
     ```sh 
+    # Depuis le répertoire raçine du projet
     docker compose up --build
-    ```
-
-    Activation du plugin permettant l'accès a une interface web si besoin :
-
-    - Commencer par rentrer dans le container :
-    ``` sh
-    docker exec -it rabbitmq bash
-    ```
-    Activer le plugin :
-    ```sh 
-    rabbitmq-plugins enable rabbitmq_management
-    ```
-
-    Si vous voulez trace rles erreurs sur les messages :
-    ```sh 
-    rabbitmq-plugins enable rabbitmq_tracing
     ```
 
 3. **Démarrer l'application frontend** :
 
     ```sh
-    npm start
+    # Depuis le répertoire /ihm du projet
+    npm run dev
     ```
 
     L'application sera accessible sur `http://localhost:3000`.
 
-### Mock des Données
-
-Pour tester l'application avec des données simulées, vous pouvez utiliser `json-server`. Assurez-vous que le fichier `mockData.json` est correctement configuré pour le mock des données.
-
-1. Lancez le serveur `json-server` pour servir les données mockées :
-
-    ```sh
-    json-server --watch public/mockData.json --port 5000
-    ```
-
-    Vous pouvez accéder aux données mockées via `http://localhost:5000/messages`.
-
-### Utilisation de la Modale de Profil
+## Utilisation de la Modale de Profil
 
 Pour définir votre pseudo et votre photo de profil :
 
@@ -105,5 +67,4 @@ Pour définir votre pseudo et votre photo de profil :
 ## Commandes Utiles
 
 - `npm install` : Installer les dépendances du projet.
-- `npm start` : Démarrer l'application en mode développement.
-- `json-server --watch public/mockData.json --port 5000` : Démarrer le serveur de données mockées.
+- `npm run dev` : Démarrer l'application en mode développement.

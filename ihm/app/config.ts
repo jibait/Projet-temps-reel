@@ -1,9 +1,11 @@
 interface Config {
-    apiBaseUrl: string;
+    stompWebSocketUrl: string;
+    messagingQueueName: string;
 }
 
 const config: Config = {
-    apiBaseUrl: process.env.BASE_URL_SERVEUR || 'http://localhost:5000', // URL par défaut pour le serveur mock
+    stompWebSocketUrl: 'ws://localhost:15674/ws',
+    messagingQueueName: '/topic/messages',
 };
 
 export default config;

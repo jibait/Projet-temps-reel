@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, Input, VStack, Image, Grid, GridItem, Text, Box } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faImage } from '@fortawesome/free-solid-svg-icons';
-import userStore from '../stores/userStore';
+import { useStore } from '../Hooks/useStore';
 
 const predefinedImages = [
     'https://lh3.googleusercontent.com/d/1UkgnKngCa3YMkhcXbzx73_-D88L2sxrQ',
@@ -14,8 +14,11 @@ const predefinedImages = [
 ];
 
 const UserInfoModale: React.FC = observer(() => {
-    const [pseudo, setPseudo] = useState(userStore.pseudo);
-    const [profilePicture, setProfilePicture] = useState<string | null>(userStore.profilePicture);
+
+    const store = useStore();
+
+    const [pseudo, setPseudo] = useState(store.pseudo);
+    const [profilePicture, setProfilePicture] = useState<string | undefined>(store.profilePicture);
     const [pseudoError, setPseudoError] = useState(false);
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,13 +42,13 @@ const UserInfoModale: React.FC = observer(() => {
             return;
         }
         setPseudoError(false);
-        userStore.setPseudo(pseudo);
-        userStore.setProfilePicture(profilePicture);
-        userStore.setModaleOpen(false);
+        store.setPseudo(pseudo);
+        store.setProfilePicture(profilePicture);
+        store.setModaleOpen(false);
     };
 
     return (
-        <Modal isOpen={userStore.isModaleOpen} onClose={() => { }} isCentered>
+        <Modal isOpen={store.isModaleOpen} onClose={() => { }} isCentered>
             <ModalOverlay />
             <ModalContent>
                 <ModalHeader>Configuration du Profil</ModalHeader>
@@ -75,6 +78,7 @@ const UserInfoModale: React.FC = observer(() => {
                                             borderRadius="full"
                                             boxSize="70px"
                                             src={image}
+                                            alt="Profile Picture"
                                             objectFit="cover"
                                             cursor="pointer"
                                             border={profilePicture === image ? '4px solid #2b6cb0' : 'none'}

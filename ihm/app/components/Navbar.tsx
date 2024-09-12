@@ -1,11 +1,14 @@
 import React from 'react';
-import { Image, Flex, IconButton, Text } from '@chakra-ui/react';
+import { Image, Flex, IconButton } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { observer } from 'mobx-react-lite';
-import userStore from '../stores/userStore'; // Assure-toi que le chemin est correct
+import { useStore } from '../Hooks/useStore';
 
 const Navbar: React.FC = () => {
+
+    const store = useStore();
+
     return (
         <Flex justify="space-between" align="center" p="4" bg="blue.600" color="white">
             <Image
@@ -15,10 +18,10 @@ const Navbar: React.FC = () => {
                 width="100%"
                 maxWidth="350px"
             />
-            {userStore.profilePicture ? (
+            {store.profilePicture ? (
                 <Flex align="center">
                     <Image
-                        src={userStore.profilePicture}
+                        src={store.profilePicture}
                         alt="Profile"
                         boxSize="50px"
                         borderRadius="full"
@@ -26,7 +29,7 @@ const Navbar: React.FC = () => {
                     <IconButton
                         aria-label="Edit Profile"
                         icon={<FontAwesomeIcon icon={faEdit} />}
-                        onClick={() => userStore.setModaleOpen(true)}
+                        onClick={() => store.setModaleOpen(true)}
                         m={2}
                     />
                 </Flex>
@@ -36,7 +39,7 @@ const Navbar: React.FC = () => {
                     icon={<FontAwesomeIcon icon={faUser} />}
                     isRound
                     size="lg"
-                    onClick={() => userStore.setModaleOpen(true)}
+                    onClick={() => store.setModaleOpen(true)}
                 />
             )}
         </Flex>

@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "projet-temps-reel": "file:ihm"
+  }
+}
