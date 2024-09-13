@@ -33,26 +33,12 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés :
     git clone https://github.com/jibait/Projet-temps-reel.git
     ```
 
-2. Installez les dépendances du projet :
-
-    ```sh
-    # Depuis le répertoire /ihm du projet
-    npm install
-    ```
-
 ## Exécution
 
-1. **Démarrer le service RabbitMQ** :
+1. **Démarrer le docker compose du projet** :
     ```sh 
     # Depuis le répertoire raçine du projet
     docker compose up --build
-    ```
-
-3. **Démarrer l'application frontend** :
-
-    ```sh
-    # Depuis le répertoire /ihm du projet
-    npm run dev
     ```
 
     L'application sera accessible sur `http://localhost:3000`.

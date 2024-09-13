@@ -10,12 +10,11 @@ interface ChatInputProps {
 
 const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, onSendImage }) => {
     const [message, setMessage] = useState<string>('');
-    const [file, setFile] = useState<File | null>(null);
+    const fileInputRef = React.createRef<HTMLInputElement>();
 
     const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         const selectedFile = event.target.files?.[0];
         if (selectedFile) {
-            setFile(selectedFile);
             onSendImage(selectedFile);
         }
     };
@@ -33,11 +32,12 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, onSendImage }) => 
                 accept="image/*"
                 onChange={handleImageUpload}
                 display="none"
+                ref={fileInputRef}
             />
             <IconButton
                 aria-label="Upload Image"
                 icon={<FontAwesomeIcon icon={faImage} />}
-                onClick={() => document.querySelector('input[type="file"]')?.click()}
+                onClick={() => fileInputRef.current?.click()}
                 mr="2"
             />
             <IconButton

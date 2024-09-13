@@ -9,3 +9,14 @@ services:
       - "15672:15672"
       - "15674:15674"
     tty: true
+
+  web:
+    build:
+      context: ./ihm
+      dockerfile: Dockerfile
+    container_name: web
+    ports:
+      - "3000:3000"
+    tty: true
+    depends_on:
+      - rabbitmq
