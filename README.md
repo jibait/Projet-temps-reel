@@ -73,3 +73,14 @@ Pour définir votre pseudo et votre photo de profil :
 
 - `npm install` : Installer les dépendances du projet.
 - `npm run dev` : Démarrer l'application en mode développement.
+
+## Rapport de Conception décrivant l'architecture du système.
+
+Ce projet est composé de deux parties principales :
+
+- **Client Web** : Le client web est une application React qui permet aux utilisateurs de se connecter à la chatroom et d'envoyer des messages. Il y'a un serveur web en Node.js avec NextJS qui gère les connexions WebSocket avec les clients et les messages RabbitMQ. Il utilise StompJS pour la communication avec RabbitMQ.
+- **RabbitMQ** : RabbitMQ est un serveur de messagerie qui permet de gérer les messages entre les clients et le serveur web.
+
+## Video de démonstration
+
+Vidéo de démonstration de la communication : https://etesiea-my.sharepoint.com/:v:/g/personal/lmoreau_et_esiea_fr/EWBZOQ9pxGFEpEZIsIlLglIBDqF-J8sj9sFvblSmwWoe5A?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=VgStfE
