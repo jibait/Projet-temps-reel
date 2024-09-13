@@ -6,11 +6,11 @@ import { faUser, faImage } from '@fortawesome/free-solid-svg-icons';
 import { useStore } from '../Hooks/useStore';
 
 const predefinedImages = [
-    'https://lh3.googleusercontent.com/d/1UkgnKngCa3YMkhcXbzx73_-D88L2sxrQ',
-    'https://lh3.googleusercontent.com/d/1d-E1Wikbb6188HhF24XJYxKsRyshee5P',
-    'https://lh3.googleusercontent.com/d/1aHs0TP2GMjQBog2cTASA6a5UR8MObdCj',
-    'https://lh3.googleusercontent.com/d/1iTGu6mfOwuGE594uvQb98gcRq72AXbZ6',
-    'https://lh3.googleusercontent.com/d/1f8pmbZApyxrfxWaekcLYAIZATfabOoD4'
+    '/profile/blobfish.jpg',
+    '/profile/gigachad.jpg',
+    '/profile/retour-vers-le-futur.jpg',
+    '/profile/shrek.jpg',
+    '/profile/this-is-fine.jpg',
 ];
 
 const UserInfoModale: React.FC = observer(() => {

@@ -2,7 +2,7 @@
 
 ## Description du Projet
 
-Le projet **Chatroom en Temps Réel** --> *Blopfish Roo est une application de messagerie en temps réel qui utilise RabbitMQ pour la gestion des messages. L'application permet aux utilisateurs de discuter en temps réel dans une interface de chat, avec la possibilité d'envoyer des messages textuels et des images.
+Le projet **Chatroom en Temps Réel** --> \*Blopfish Roo est une application de messagerie en temps réel qui utilise RabbitMQ pour la gestion des messages. L'application permet aux utilisateurs de discuter en temps réel dans une interface de chat, avec la possibilité d'envoyer des messages textuels et des images.
 
 ### Fonctionnalités Clés
 
@@ -29,19 +29,38 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés :
 
 1. Clonez le dépôt :
 
-    ```sh
-    git clone https://github.com/jibait/Projet-temps-reel.git
-    ```
+   ```sh
+   git clone https://github.com/jibait/Projet-temps-reel.git
+   ```
 
-## Exécution
+## Exécution du Projet en production
 
-1. **Démarrer le docker compose du projet** :
-    ```sh 
-    # Depuis le répertoire raçine du projet
-    docker compose up --build
-    ```
+   ```sh
+   # Depuis le répertoire raçine du projet
+   docker compose up --build
+   ```
 
-    L'application sera accessible sur `http://localhost:3000`.
+   L'application sera accessible sur `http://localhost:3000`.
+
+## Exécution du Projet en mode développement
+
+   Démarrage du service RabbitMQ :
+   ```sh
+   # Depuis le répertoire raçine du projet
+   docker-compose -f dev.docker-compose.yml up --build
+   ```
+
+   Démarrage du serveur web de développement :
+   ```sh
+   # Depuis le répertoire ./ihm du projet
+   
+   # Installation des dépendances
+   npm install
+   # Démarrage du serveur
+   npm run dev
+   ```
+
+   L'application sera accessible sur `http://localhost:3000`.
 
 ## Utilisation de la Modale de Profil
 

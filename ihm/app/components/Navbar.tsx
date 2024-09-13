@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
     return (
         <Flex justify="space-between" align="center" p="4" bg="blue.600" color="white">
             <Image
-                src="https://lh3.googleusercontent.com/d/1XhYGaNFMfFDFFqIehAZX2g1BzRjyvatB"
+                src="/logo.png"
                 alt="Logo"
                 objectFit="contain"
                 width="100%"
