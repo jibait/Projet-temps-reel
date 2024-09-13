@@ -25,6 +25,12 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, onSendImage }) => 
                 placeholder="Tapez un message..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
+                onKeyUp={(e) => {
+                    if (e.key === 'Enter') {
+                        onSendMessage(message);
+                        setMessage('');
+                    }
+                }}
                 mr="4"
             />
             <Input
