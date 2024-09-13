@@ -17,7 +17,7 @@ Le projet **Chatroom en Temps Réel** --> \*Blopfish Roo est une application de 
 - Frédéric Hilleriteau
 - Jean-Baptiste Lelandais
 - Lino Moreau
-- Etienne Chevrolliet
+- Etienne Chevrollier
 
 ## Prérequis
 
